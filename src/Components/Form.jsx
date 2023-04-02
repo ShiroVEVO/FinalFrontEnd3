@@ -13,6 +13,7 @@ const Form = () => {
     if (name.length <= 5 || !email.includes("@")) {
       setError("Por favor verifique su información nuevamente");
     } else {
+      setError("");
       setMessage("Gracias " + name + ",  te contactaremos cuando antes vía mail");
     }
   };

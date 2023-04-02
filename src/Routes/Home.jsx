@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { APIContext } from '../contexts/APIContext';
 import Card from '../Components/Card'
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
 const Home = () => {
-  const [users, setUsers] = useState([]);
+  const {users} = useContext(APIContext);
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(data => setUsers(data));
-  }, []);
-  
+  console.log(users);
+
   return (
     <main className="">
       <h1>Home</h1>
@@ -24,4 +19,5 @@ const Home = () => {
   );
 }
 
-export default Home
+
+export default Home;

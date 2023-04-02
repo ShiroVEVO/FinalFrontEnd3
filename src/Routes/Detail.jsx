@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from "react-router-dom";
+import { APIContext } from '../contexts/APIContext';
 
 
 
@@ -7,38 +8,32 @@ import { useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
-  const [user, setUser] = useState();
-  
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(
-          `https://jsonplaceholder.typicode.com/users/${id}`
-        );
-        const data = await response.json();
-        setUser(data);
-      }catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, [id]);
+  const { users, isLoading, error } = useContext(APIContext);
+  const user = users.find(user => user.id === Number(id));
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error.message}</p>;
+  }
+
+  if (!user) {
+    return <p>User not found</p>;
+  }
 
   return (
     <>
-    <h1>Detail Dentist id </h1>
-    {user ? (
+      <h1>Detail Dentist id {id}</h1>
       <div>
         <h2>{user.name}</h2>
         <p>Email: {user.email}</p>
         <p>Phone: {user.phone}</p>
         <p>Website: {user.website}</p>
       </div>
-    ) : (
-      <p>Loading...</p>
-    )}
     </>
-  )
+  );
 }
 
 export default Detail
