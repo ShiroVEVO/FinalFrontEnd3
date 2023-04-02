@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer>
         <p>Powered by</p>
-        <img src="./img/DH.png" alt='DH-logo' />
+        <img src={process.env.PUBLIC_URL + '/images/DH.png'} alt='DH-logo'/>
     </footer>
   )
 }
