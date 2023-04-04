@@ -1,17 +1,28 @@
-import React from "react";
+//Importes de react
+import React, { useContext } from 'react';
+
+//Importes de contexto
+import { APIContext } from '../contexts/APIContext';
+
+//Importes de componentes
 import Card from "../Components/Card";
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
-
 const Favs = () => {
-  const favorites = JSON.parse(localStorage.getItem("favorites")) || [];// Obtener la lista de favoritos actual de la localstore
+  // Obtener la lista de favoritos actual de la localstore y los usuarios totales del contexto
+  const favorites = JSON.parse(localStorage.getItem("favorites")) || []; 
+  const {users} = useContext(APIContext);
+
+  //Filtra los usuarios recibidos del contexto acorde a los favoritos de la LocalStore
+  const filteredUsers = users.filter((user) => favorites.includes(user.id));
   
+  //Regresa la card particular de cada favorito
   return (
     <>
       <h1>Dentists Favs</h1>
       <div className="card-grid">
-        {/* este componente debe consumir los destacados del localStorage */}
-        {/* Deberan renderizar una Card por cada uno de ellos */}
+        {filteredUsers.map((user) => (
+          <Card key={user.id} name={user.name} username={user.username} id={user.id} />
+        ))}
       </div>
     </>
   );

@@ -1,4 +1,7 @@
+//Importes necesarios de react
 import React, { useState } from "react";
+
+//Importes necesarios de estilos
 import "./Form.css";
 
 const Form = () => {
@@ -8,9 +11,11 @@ const Form = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
+  //Función de validación para cuando se envia el formulario
   const handleSubmit = (event) => {
     event.preventDefault();
     if (name.length <= 5 || !email.includes("@")) {
+      setMessage("");
       setError("Por favor verifique su información nuevamente");
     } else {
       setError("");
@@ -18,14 +23,17 @@ const Form = () => {
     }
   };
 
-  const handleNameChange = (event) => { //Actualiza el estado del name
+  //Actualiza el estado del name
+  const handleNameChange = (event) => {
     setName(event.target.value);
   };
-  
-  const handleEmailChange = (event) => {//Actualiza el estado del email
+
+  //Actualiza el estado del email
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
+  //Regresa el formulario particular o sus label de error/Aceptación
   return (
     <div>
       <form onSubmit={handleSubmit}>

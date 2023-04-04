@@ -1,12 +1,17 @@
+//Importes de react
 import React, { useContext } from 'react';
+
+//Importes de contexto
 import { APIContext } from '../contexts/APIContext';
+
+//Importes de componentes
 import Card from '../Components/Card'
 
 const Home = () => {
+  //Trae los usuarios del contexto
   const {users} = useContext(APIContext);
 
-  console.log(users);
-
+  //Regresa una card por cada usuario recibido del contexto
   return (
     <main className="">
       <h1>Home</h1>
@@ -17,7 +22,7 @@ const Home = () => {
       </div>
     </main>
   );
-}
+};
 
 
 export default Home;

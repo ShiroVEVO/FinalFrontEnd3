@@ -1,28 +1,25 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { useParams } from "react-router-dom";
-import { APIContext } from '../contexts/APIContext';
+//Importes necesarios de react
+import React, {useContext} from 'react'
+import {useParams} from "react-router-dom";
 
-
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+//Importes necesarios de contextos
+import {APIContext} from '../contexts/APIContext';
 
 const Detail = () => {
+  //Seteo de contexto, parametros y usuario particular
   const { id } = useParams();
   const { users, isLoading, error } = useContext(APIContext);
   const user = users.find(user => user.id === Number(id));
 
-  if (isLoading) {
+  if (isLoading) { //Fixeo del renderizado previo conexión con el contexto
     return <p>Loading...</p>;
-  }
-
-  if (error) {
+  } else if (error) {
     return <p>{error.message}</p>;
-  }
-
-  if (!user) {
+  } else if (!user) {
     return <p>User not found</p>;
   }
 
+  // Regresa el dentista particular
   return (
     <>
       <h1>Detail Dentist id {id}</h1>
